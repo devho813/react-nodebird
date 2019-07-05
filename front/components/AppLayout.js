@@ -1,21 +1,57 @@
 import React from 'react';
-import {Menu, Input} from 'antd';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
+import {Menu, Input, Button, Row, Col, Card, Avatar} from 'antd';
+import Head from "next/head";
+
+const dummy = {
+  nickname: '이찬호'
+}
 
 const AppLayout = ({children}) => {
   return (
     <>
+      <Head>
+        <title>NodeBird</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.19.8/antd.css" />
+      </Head>
       <div>
         <Menu mode="horizontal">
-          <Menu.Item key="home">노드버드</Menu.Item>
-          <Menu.Item key="profile">프로필</Menu.Item>
+          <Menu.Item key="home">
+            <Link href="/"><a>노드버드</a></Link>
+          </Menu.Item>
+          <Menu.Item key="profile">
+            <Link href="/profile"><a>프로필</a></Link>
+          </Menu.Item>
           <Menu.Item key="mail">
             <Input.Search enterButton style={{verticalAlign: 'middle'}} />
           </Menu.Item>
         </Menu>
-        {children}
+        <Link href="/signup"><Button>회원가입</Button></Link>
+        <Row>
+          <Col xs={24} md={6}>
+            <Card>
+              <Card.Meta
+                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
+                title={dummy.nickname}
+              />
+            </Card>
+          </Col>
+          <Col xs={24} md={12}>
+            {children}
+          </Col>
+          <Col xs={24} md={6}>
+
+          </Col>
+        </Row>
       </div>
     </>
   )
 };
+
+// 컴파일 타임 에러, 런타임 에러
+AppLayout.propTypes = {
+  children: PropTypes.node
+}
 
 export default AppLayout;
