@@ -3,16 +3,22 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import {Menu, Input, Button, Row, Col, Card, Avatar} from 'antd';
 import Head from "next/head";
+import LoginForm from './LoginForm';
+import MiniProfile from './MiniProfile';
 
 const dummy = {
-  nickname: '이찬호'
+  nickname: '이찬호',
+  Post: [],
+  Followings: [],
+  Followers: [],
+  isLoggedIn: true
 }
 
 const AppLayout = ({children}) => {
   return (
     <>
       <Head>
-        <title>NodeBird</title>
+      <title>NodeBird</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.19.8/antd.css" />
       </Head>
       <div>
@@ -27,15 +33,13 @@ const AppLayout = ({children}) => {
             <Input.Search enterButton style={{verticalAlign: 'middle'}} />
           </Menu.Item>
         </Menu>
-        <Link href="/signup"><Button>회원가입</Button></Link>
-        <Row>
+        <Row gutter={8}>
           <Col xs={24} md={6}>
-            <Card>
-              <Card.Meta
-                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
-                title={dummy.nickname}
-              />
-            </Card>
+            {dummy.isLoggedIn ?
+              <MiniProfile />
+              :
+              <LoginForm />
+            }
           </Col>
           <Col xs={24} md={12}>
             {children}
