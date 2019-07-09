@@ -1,20 +1,26 @@
-export const initialState = {
-  isLoggedIn: false,
-  user: {}
+const dummyUser = {
+  nickname: '이찬호',
+  Post: [],
+  Followings: [],
+  Followers: [],
 }
 
+export const initialState = {
+  isLoggedIn: false,
+  user: null,
+  signUpData: {}
+}
+
+export const SIGN_UP = 'SIGN_UP';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 
-const loginAction = {
-  type: LOG_IN,
-  user: {
-    nickname: '이찬호',
+// 액션 생성자
+export const signUpAction = (data) => {
+  return {
+    type: SIGN_UP,
+    data
   }
-}
-
-const logoutAction = {
-  type: LOG_OUT
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,13 +29,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action.user
+        user: dummyUser
       }
     case LOG_OUT:
       return {
         ...state,
         isLoggedIn: false,
         user: null
+      }
+    case SIGN_UP:
+      return {
+        ...state,
+        signUpData: action.data
       }
     default:
       return {

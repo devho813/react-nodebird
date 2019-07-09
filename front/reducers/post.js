@@ -1,24 +1,18 @@
 export const initialState = {
-  mainPosts: [],
+  imagePaths: [], // 미리보기 이미지
+  mainPosts: [{
+    user: {
+      id: 1,
+      nickname: '이찬호'
+    },
+    createdAt: null,
+    img: 'https://react-nodebird.s3.ap-northeast-2.amazonaws.com/thumb/1561169557454about-blank.jpg', // 이미지 주소
+    content: '첫번째 게시글'
+  }]
 }
 
 export const ADD_POST = 'ADD_POST';
 export const ADD_DUMMY = 'ADD_DUMMY';
-
-const addPost = {
-  type: ADD_POST
-}
-
-const addDummy = {
-  type: ADD_DUMMY,
-  data: {
-    content: 'Hello',
-    userId: 1,
-    user: {
-      nickname: '이찬호'
-    }
-  }
-}
 
 const reducer = (state = initialState, action) => {
   switch(action.type){

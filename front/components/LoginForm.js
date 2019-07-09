@@ -1,8 +1,11 @@
 import React, {useState, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import Link from 'next/link';
 import {Form, Input, Button} from 'antd';
+import { LOG_IN } from '../reducers/user';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   
@@ -16,7 +19,8 @@ const LoginForm = () => {
 
   const onLogin = useCallback((e) => {
     e.preventDefault();
-    console.log(id, password);
+    dispatch({type: LOG_IN});
+
   }, [id, password]);
 
   return (
